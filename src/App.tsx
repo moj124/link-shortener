@@ -119,9 +119,10 @@ function App(): JSX.Element {
                     mb={4}
                     colorScheme="teal"
                     isLoading={isSubmitting}
-                    onClick={(event) =>
-                      {window.location.href = `${process.env.REACT_APP_API}/${newURL}`; reset({ url: "" });}
-                    }
+                    onClick={(event) => {
+                      window.location.href = `${process.env.REACT_APP_API}/${newURL}`;
+                      reset({ url: "" });
+                    }}
                     marginEnd={3}
                   >
                     Visit URL
