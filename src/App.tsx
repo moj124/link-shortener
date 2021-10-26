@@ -12,12 +12,8 @@ import {
   Box,
   useClipboard,
   InputLeftAddon,
+  Container,
 } from "@chakra-ui/react";
-import { useForm } from "react-hook-form";
-import { nanoid } from "nanoid";
-import { useState } from "react";
-import { validateURL } from "./utils/validateURL";
-import QRCode from "qrcode.react";
 import {
   EmailIcon,
   EmailShareButton,
@@ -30,6 +26,11 @@ import {
   WhatsappIcon,
   WhatsappShareButton,
 } from "react-share";
+import { useForm } from "react-hook-form";
+import { nanoid } from "nanoid";
+import { useState } from "react";
+import { validateURL } from "./utils/validateURL";
+import QRCode from "qrcode.react";
 
 function App(): JSX.Element {
   const [URLsubmitted, setURLsubmitted] = useState(false);
@@ -67,8 +68,14 @@ function App(): JSX.Element {
   };
 
   return (
-    <Flex height="100vh" alignItems="center" justifyContent="center">
-      <form onSubmit={handleSubmit(onSubmissionHandler)}>
+    <Container centerContent>
+    <form onSubmit={handleSubmit(onSubmissionHandler)}>
+      <VStack
+        height="100vh"
+        alignItems="center"
+        justifyContent="center"
+        spacing={10}
+      >
         <Flex
           width={{ base: "75%", sm: "75%", md: "110%" }}
           direction="column"
@@ -100,39 +107,43 @@ function App(): JSX.Element {
               </FormErrorMessage>
             </Box>
           </FormControl>
-          <FormControl isInvalid={errors.addon}>
-            <VStack marginTop="15px" display="flex-start">
-              <FormLabel htmlFor="addon">Customise Link</FormLabel>
-              <InputGroup>
-                <InputLeftAddon>{process.env.REACT_APP_API}/</InputLeftAddon>
-                <Input
-                  id="addon"
-                  placeholder="alias"
-                  value={newURL}
-                  onChange={(e) => {
-                    setURLnew(e.target.value);
-                    setURLsubmitted(false);
-                  }}
-                />
-              </InputGroup>
-            </VStack>
-          </FormControl>
-          <Box display="flex" justifyContent="space-between" marginTop="15px">
-            <Button
-              isDisabled={URLsubmitted}
-              mb={4}
-              colorScheme="teal"
-              type="submit"
-              isLoading={isSubmitting}
-            >
-              {" "}
-              Shorten{" "}
-            </Button>
-          </Box>
+          {!URLsubmitted && (
+            <FormControl isInvalid={errors.addon}>
+              <VStack marginTop="15px" display="flex-start">
+                <FormLabel htmlFor="addon">Customise Link</FormLabel>
+                <InputGroup>
+                  <InputLeftAddon>{process.env.REACT_APP_API}/</InputLeftAddon>
+                  <Input
+                    id="addon"
+                    placeholder="alias"
+                    value={newURL}
+                    onChange={(e) => {
+                      setURLnew(e.target.value);
+                      setURLsubmitted(false);
+                    }}
+                  />
+                </InputGroup>
+              </VStack>
+            </FormControl>
+          )}
+          {!URLsubmitted && (
+            <Box display="flex" justifyContent="space-between" marginTop="15px">
+              <Button
+                isDisabled={URLsubmitted}
+                mb={4}
+                colorScheme="teal"
+                type="submit"
+                isLoading={isSubmitting}
+              >
+                {" "}
+                Shorten{" "}
+              </Button>
+            </Box>
+          )}
           {/* use aria-invalid to indicate field contain error */}
           {URLsubmitted && (
             <>
-              <Box>
+              <Box marginTop="15px">
                 <FormLabel>Shortened Link</FormLabel>
                 <InputGroup>
                   <Input
@@ -241,8 +252,10 @@ function App(): JSX.Element {
             </>
           )}
         </Flex>
-      </form>
-    </Flex>
+      </VStack>
+    </form>
+
+    </Container>
   );
 }
 
