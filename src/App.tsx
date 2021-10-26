@@ -15,7 +15,6 @@ import { useForm } from "react-hook-form";
 import { nanoid } from "nanoid";
 import { useState } from "react";
 import { validateURL } from "./utils/validateURL";
-import QRCode from "qrcode.react";
 
 function App(): JSX.Element {
   const [URLsubmitted, setURLsubmitted] = useState(false);
@@ -152,7 +151,6 @@ function App(): JSX.Element {
                   >
                     QRcode
                   </Button>
-                  <QRCode value="http://facebook.github.io/react/" />
                 </Box>
               </>
             )}
