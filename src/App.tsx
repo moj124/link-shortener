@@ -46,8 +46,15 @@ function App(): JSX.Element {
     formState: { errors, isSubmitting },
   } = useForm();
   const onSubmissionHandler = async () => {
-    const link = nanoid(10);
-    setURLnew(link);
+    let link;
+
+    if (newURL.length === 0) {
+      link = nanoid(10);
+      setURLnew(link);
+    } else {
+      link = newURL;
+    }
+
     setURLsubmitted(true);
     await fetch(`${process.env.REACT_APP_API}`, {
       method: "PUT",
@@ -98,7 +105,15 @@ function App(): JSX.Element {
               <FormLabel htmlFor="addon">Customise Link</FormLabel>
               <InputGroup>
                 <InputLeftAddon>{process.env.REACT_APP_API}/</InputLeftAddon>
-                <Input id="addon" placeholder="alias" />
+                <Input
+                  id="addon"
+                  placeholder="alias"
+                  value={newURL}
+                  onChange={(e) => {
+                    setURLnew(e.target.value);
+                    setURLsubmitted(false);
+                  }}
+                />
               </InputGroup>
             </VStack>
           </FormControl>
