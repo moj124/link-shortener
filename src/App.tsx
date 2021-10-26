@@ -59,6 +59,7 @@ function App(): JSX.Element {
             <Box>
               <Input
                 id="url"
+                value = {originalURL}
                 aria-invalid={errors.url ? "true" : "false"}
                 {...register("url", {
                   validate: (value) =>
@@ -137,7 +138,7 @@ function App(): JSX.Element {
                     }}
                     marginEnd={3}
                   >
-                    Clear
+                    Shorten another
                   </Button>
                   <Button
                     isDisabled={!URLsubmitted}
