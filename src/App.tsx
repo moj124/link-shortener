@@ -31,6 +31,7 @@ import { nanoid } from "nanoid";
 import { useState } from "react";
 import { validateURL } from "./utils/validateURL";
 import QRCode from "qrcode.react";
+import { validateAddon } from "./utils/validateAddon";
 
 function App(): JSX.Element {
   const [URLsubmitted, setURLsubmitted] = useState(false);
@@ -119,12 +120,20 @@ function App(): JSX.Element {
                       id="addon"
                       placeholder="alias"
                       value={newURL}
+                      aria-invalid={errors.addon ? "true" : "false"}
+                      {...register("addon", {
+                        validate: (value) =>
+                          validateAddon(value) || "please enter a valid alias",
+                      })}
                       onChange={(e) => {
                         setURLnew(e.target.value);
                         setURLsubmitted(false);
                       }}
                     />
                   </InputGroup>
+                  <FormErrorMessage paddingLeft={180}>
+                    {errors.addon && errors.addon.message}
+                  </FormErrorMessage>
                 </VStack>
               </FormControl>
             )}
@@ -193,6 +202,7 @@ function App(): JSX.Element {
                     isLoading={isSubmitting}
                     onClick={() => {
                       reset({ url: "" });
+                      reset({ addon: "" });
                       setURLsubmitted(false);
                     }}
                     marginEnd={3}
