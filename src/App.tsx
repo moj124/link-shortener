@@ -48,8 +48,8 @@ function App(): JSX.Element {
     formState: { errors, isSubmitting },
   } = useForm();
   const handleMyURLs = async () => {
-    return
-  }
+    return;
+  };
 
   const onSubmissionHandler = async () => {
     let link;
@@ -257,30 +257,35 @@ function App(): JSX.Element {
                 )}
               </>
             )}
-          { URLsubmitted &&
-          <Box display="flex" justifyContent="flex-start" marginTop="15px">
-            <Button
-              mb={4}
-              colorScheme="teal"
-              isLoading={isSubmitting}
-              onClick={() => {
-                reset({ url: "" });
-                reset({ addon: "" });
-                setURLsubmitted(false);
-              }}
-              marginEnd={3}
+            {URLsubmitted && (
+              <Box
+                display="flex"
+                justifyContent="space-between"
+                marginTop="15px"
               >
-              Shorten another
-            </Button>
-            <Button
-              mb={4}
-              colorScheme="teal"
-              isLoading={isSubmitting}
-              onClick={() => handleMyURLs}
-              >
-              My URLs
-            </Button>
-          </Box>}
+                <Button
+                  mb={4}
+                  colorScheme="teal"
+                  isLoading={isSubmitting}
+                  onClick={() => {
+                    reset({ url: "" });
+                    reset({ addon: "" });
+                    setURLsubmitted(false);
+                  }}
+                  marginEnd={3}
+                >
+                  Shorten another
+                </Button>
+                <Button
+                  mb={4}
+                  colorScheme="teal"
+                  isLoading={isSubmitting}
+                  onClick={() => handleMyURLs}
+                >
+                  My URLs
+                </Button>
+              </Box>
+            )}
           </Flex>
         </VStack>
       </form>
