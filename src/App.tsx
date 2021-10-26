@@ -121,7 +121,6 @@ function App(): JSX.Element {
                     isLoading={isSubmitting}
                     onClick={(event) => {
                       window.location.href = `${process.env.REACT_APP_API}/${newURL}`;
-                      reset({ url: "" });
                     }}
                     marginEnd={3}
                   >
