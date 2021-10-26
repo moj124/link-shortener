@@ -47,6 +47,10 @@ function App(): JSX.Element {
     reset,
     formState: { errors, isSubmitting },
   } = useForm();
+  const handleMyURLs = async () => {
+    return
+  }
+
   const onSubmissionHandler = async () => {
     let link;
 
@@ -78,7 +82,7 @@ function App(): JSX.Element {
           spacing={10}
         >
           <Flex
-            width={{ base: "75%", sm: "75%", md: "110%" }}
+            width={{ base: "75%", sm: "75%", md: "130%" }}
             direction="column"
             background="white"
             p={12}
@@ -200,20 +204,6 @@ function App(): JSX.Element {
                     mb={4}
                     colorScheme="teal"
                     isLoading={isSubmitting}
-                    onClick={() => {
-                      reset({ url: "" });
-                      reset({ addon: "" });
-                      setURLsubmitted(false);
-                    }}
-                    marginEnd={3}
-                  >
-                    Shorten another
-                  </Button>
-                  <Button
-                    isDisabled={!URLsubmitted}
-                    mb={4}
-                    colorScheme="teal"
-                    isLoading={isSubmitting}
                     onClick={() => setShowQRCode(!showQRCode)}
                   >
                     Share
@@ -267,6 +257,30 @@ function App(): JSX.Element {
                 )}
               </>
             )}
+          { URLsubmitted &&
+          <Box display="flex" justifyContent="flex-start" marginTop="15px">
+            <Button
+              mb={4}
+              colorScheme="teal"
+              isLoading={isSubmitting}
+              onClick={() => {
+                reset({ url: "" });
+                reset({ addon: "" });
+                setURLsubmitted(false);
+              }}
+              marginEnd={3}
+              >
+              Shorten another
+            </Button>
+            <Button
+              mb={4}
+              colorScheme="teal"
+              isLoading={isSubmitting}
+              onClick={() => handleMyURLs}
+              >
+              My URLs
+            </Button>
+          </Box>}
           </Flex>
         </VStack>
       </form>
