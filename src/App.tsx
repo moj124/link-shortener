@@ -59,7 +59,7 @@ function App(): JSX.Element {
             <Box>
               <Input
                 id="url"
-                value = {originalURL}
+                value={originalURL}
                 aria-invalid={errors.url ? "true" : "false"}
                 {...register("url", {
                   validate: (value) =>
