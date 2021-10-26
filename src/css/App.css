@@ -1,3 +1,23 @@
 body {
   background-color: rgb(141, 44, 211) !important;
 }
+
+.custom-share-button {
+  display: inline-flex;
+}
+
+.custom-share-button:hover {
+  opacity: 0.7;
+}
+
+.custom-share-button p {
+  padding: 0 0 0 12px;
+}
+
+.custom-share-icon rect {
+  fill: #319795;
+}
+
+.custom-share-button p:hover {
+  text-decoration: underline;
+}
