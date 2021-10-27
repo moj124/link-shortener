@@ -7,40 +7,25 @@ import {
   FormControl,
   FormErrorMessage,
   InputGroup,
-  InputRightElement,
   VStack,
   Box,
-  useClipboard,
   InputLeftAddon,
   Container,
+  Collapse,
 } from "@chakra-ui/react";
-import {
-  EmailIcon,
-  EmailShareButton,
-  FacebookIcon,
-  FacebookShareButton,
-  LinkedinIcon,
-  LinkedinShareButton,
-  TwitterIcon,
-  TwitterShareButton,
-  WhatsappIcon,
-  WhatsappShareButton,
-} from "react-share";
+
 import { useForm } from "react-hook-form";
 import { nanoid } from "nanoid";
 import { useState } from "react";
 import { validateURL } from "./utils/validateURL";
-import QRCode from "qrcode.react";
 import { validateAddon } from "./utils/validateAddon";
+import { ShortLinkView } from "./components/ShortLinkView";
 
 function App(): JSX.Element {
   const [URLsubmitted, setURLsubmitted] = useState(false);
-  const [showQRCode, setShowQRCode] = useState(false);
   const [originalURL, setURLoriginal] = useState("");
   const [newURL, setURLnew] = useState("");
-  const { hasCopied, onCopy } = useClipboard(
-    process.env.REACT_APP_API + "/" + newURL
-  );
+
   const {
     handleSubmit,
     register,
@@ -106,13 +91,12 @@ function App(): JSX.Element {
                   }}
                   autoFocus
                 />
-                {/* use  to announce the error message */}
                 <FormErrorMessage>
                   {errors.url && errors.url.message}
                 </FormErrorMessage>
               </Box>
             </FormControl>
-            {!URLsubmitted && (
+            <Collapse in={!URLsubmitted}>
               <FormControl isInvalid={errors.addon}>
                 <VStack marginTop="15px" display="flex-start">
                   <FormLabel htmlFor="addon">Customise Link</FormLabel>
@@ -140,8 +124,6 @@ function App(): JSX.Element {
                   </FormErrorMessage>
                 </VStack>
               </FormControl>
-            )}
-            {!URLsubmitted && (
               <Box
                 display="flex"
                 justifyContent="space-between"
@@ -154,110 +136,18 @@ function App(): JSX.Element {
                   type="submit"
                   isLoading={isSubmitting}
                 >
-                  {" "}
-                  Shorten{" "}
+                  Shorten
                 </Button>
               </Box>
-            )}
-            {/* use aria-invalid to indicate field contain error */}
-            {URLsubmitted && (
-              <>
-                <Box marginTop="15px">
-                  <FormLabel>Shortened Link</FormLabel>
-                  <InputGroup>
-                    <Input
-                      value={process.env.REACT_APP_API + "/" + newURL}
-                      onChange={(e) => setURLnew(e.target.value)}
-                      variant="outline"
-                      mb={3}
-                      type="text"
-                      readOnly={true}
-                      autoFocus
-                    />
-                    <InputRightElement width="4.5rem">
-                      <Button
-                        h="1.75rem"
-                        size="sm"
-                        onClick={onCopy}
-                        colorScheme="teal"
-                      >
-                        {hasCopied ? "Copied" : "Copy"}
-                      </Button>
-                    </InputRightElement>
-                  </InputGroup>
-                </Box>
-                <Box display="flex" justifyContent="flex-start">
-                  <Button
-                    isDisabled={!URLsubmitted}
-                    mb={4}
-                    colorScheme="teal"
-                    isLoading={isSubmitting}
-                    onClick={(event) => {
-                      window.location.href = `${process.env.REACT_APP_API}/${newURL}`;
-                    }}
-                    marginEnd={3}
-                  >
-                    Visit URL
-                  </Button>
-                  <Button
-                    isDisabled={!URLsubmitted}
-                    mb={4}
-                    colorScheme="teal"
-                    isLoading={isSubmitting}
-                    onClick={() => setShowQRCode(!showQRCode)}
-                  >
-                    Share
-                  </Button>
-                </Box>
-                {showQRCode && (
-                  <Box flex-direction="row" display="flex">
-                    <QRCode
-                      value={`${process.env.REACT_APP_API}/${newURL}`}
-                      size={200}
-                    />
-                    <VStack paddingLeft={3} alignItems="none">
-                      <FacebookShareButton
-                        url={`${process.env.REACT_APP_API}/${newURL}`}
-                        quote="Click Here"
-                        className="custom-share-button"
-                      >
-                        <FacebookIcon size={35} className="custom-share-icon" />
-                        <p>Facebook</p>
-                      </FacebookShareButton>
-                      <TwitterShareButton
-                        url={`${process.env.REACT_APP_API}/${newURL}`}
-                        className="custom-share-button"
-                      >
-                        <TwitterIcon size={35} className="custom-share-icon" />
-                        <p>Twitter</p>
-                      </TwitterShareButton>
-                      <WhatsappShareButton
-                        url={`${process.env.REACT_APP_API}/${newURL}`}
-                        className="custom-share-button"
-                      >
-                        <WhatsappIcon size={35} className="custom-share-icon" />
-                        <p>Whatsapp</p>
-                      </WhatsappShareButton>
-                      <LinkedinShareButton
-                        url={`${process.env.REACT_APP_API}/${newURL}`}
-                        className="custom-share-button"
-                      >
-                        <LinkedinIcon size={35} className="custom-share-icon" />
-                        <p>Linkedin</p>
-                      </LinkedinShareButton>
-                      <EmailShareButton
-                        url={`${process.env.REACT_APP_API}/${newURL}`}
-                        className="custom-share-button"
-                      >
-                        <EmailIcon size={35} className="custom-share-icon" />
-                        <p>Email</p>
-                      </EmailShareButton>
-                    </VStack>
-                  </Box>
-                )}
-              </>
-            )}
-            {URLsubmitted && (
+            </Collapse>
+            <Collapse in={URLsubmitted} animateOpacity>
+              <ShortLinkView
+                url={newURL}
+                isURLSubmitted={URLsubmitted}
+                setURLnew={(url: string) => {
+                  setURLnew(url);
+                }}
+              />
               <Box
                 display="flex"
                 justifyContent="space-between"
@@ -285,7 +175,7 @@ function App(): JSX.Element {
                   My URLs
                 </Button>
               </Box>
-            )}
+            </Collapse>
           </Flex>
         </VStack>
       </form>
