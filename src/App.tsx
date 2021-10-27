@@ -12,29 +12,57 @@ import {
   InputLeftAddon,
   Container,
   Collapse,
+  HStack,
+  Drawer,
+  DrawerOverlay,
+  DrawerBody,
+  DrawerCloseButton,
+  DrawerContent,
+  DrawerFooter,
+  DrawerHeader,
+  useDisclosure,
+  Link,
+  Text
 } from "@chakra-ui/react";
 
 import { useForm } from "react-hook-form";
 import { nanoid } from "nanoid";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { validateURL } from "./utils/validateURL";
 import { validateAddon } from "./utils/validateAddon";
 import { ShortLinkView } from "./components/ShortLinkView";
+
+interface URLrecord {
+  base_link: string;
+  new_link: string;
+}
 
 function App(): JSX.Element {
   const [URLsubmitted, setURLsubmitted] = useState(false);
   const [originalURL, setURLoriginal] = useState("");
   const [newURL, setURLnew] = useState("");
-
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [myURLs, setURLs] = useState<URLrecord[]>([]);
   const {
     handleSubmit,
     register,
     reset,
     formState: { errors, isSubmitting },
   } = useForm();
-  const handleMyURLs = async () => {
-    return;
-  };
+
+  useEffect(() =>{
+    const loadURLs = async () => {
+      const res = await fetch(`${process.env.REACT_APP_API}/urls`);
+      const result = await res.json();
+      setURLs(result.data);
+    };
+    loadURLs();
+  },[URLsubmitted]);
+
+  const url_posts = myURLs.map((element,index) => <Box p={5} key={index} shadow="md" borderWidth="1px">
+  <Heading fontSize="xl"><Link color="teal.500" href={`${process.env.REACT_APP_API}/${element.new_link}`}>{element.new_link}</Link></Heading>
+  <Text mt={4}>{element.base_link}</Text>
+</Box>)
 
   const onSubmissionHandler = async () => {
     let link;
@@ -59,6 +87,7 @@ function App(): JSX.Element {
 
   return (
     <Container centerContent>
+      <HStack>
       <form onSubmit={handleSubmit(onSubmissionHandler)}>
         <VStack
           height="100vh"
@@ -170,7 +199,7 @@ function App(): JSX.Element {
                   mb={4}
                   colorScheme="teal"
                   isLoading={isSubmitting}
-                  onClick={() => handleMyURLs}
+                  onClick={onOpen}
                 >
                   My URLs
                 </Button>
@@ -179,6 +208,31 @@ function App(): JSX.Element {
           </Flex>
         </VStack>
       </form>
+      <Drawer
+        isOpen={isOpen}
+        placement="right"
+        onClose={onClose}
+        size ="md"
+      >
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader>List Of URLs</DrawerHeader>
+
+          <DrawerBody>
+            <VStack align= "none">
+              {url_posts}
+            </VStack>
+          </DrawerBody>
+
+          <DrawerFooter>
+            <Button variant="outline" mr={3} size="lg" onClick={onClose}>
+              Exit
+            </Button>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>     
+      </HStack>
     </Container>
   );
 }
