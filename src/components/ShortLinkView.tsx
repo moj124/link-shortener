@@ -47,7 +47,7 @@ export function ShortLinkView({
           </InputRightElement>
         </InputGroup>
       </Box>
-      <Box display="flex" justifyContent="flex-start">
+      <Box display="flex" justifyContent="flex-start" alignItems="none">
         <Button
           isDisabled={!isURLSubmitted}
           mb={4}

@@ -21,8 +21,6 @@ import {
   DrawerFooter,
   DrawerHeader,
   useDisclosure,
-  Link,
-  Text,
 } from "@chakra-ui/react";
 
 import { useForm } from "react-hook-form";
@@ -31,8 +29,9 @@ import { useState, useEffect } from "react";
 import { validateURL } from "./utils/validateURL";
 import { validateAddon } from "./utils/validateAddon";
 import { ShortLinkView } from "./components/ShortLinkView";
+import { URLPost } from "./components/URLPost";
 
-interface URLrecord {
+export interface URLrecord {
   base_link: string;
   new_link: string;
 }
@@ -60,18 +59,13 @@ function App(): JSX.Element {
   }, [URLsubmitted]);
 
   const url_posts = myURLs.map((element, index) => (
-    <Box p={5} key={index} shadow="md" borderWidth="1px">
-      <Heading fontSize="xl">
-        <Link
-          target="_blank"
-          color="teal.500"
-          href={`${process.env.REACT_APP_API}/${element.new_link}`}
-        >
-          {element.new_link}
-        </Link>
-      </Heading>
-      <Text mt={4}>{element.base_link}</Text>
-    </Box>
+    <URLPost
+      key={index}
+      id={index}
+      new_link={element.new_link}
+      base_link={element.base_link}
+      setURLs = {(urls:URLrecord[]) => setURLs(urls)}
+    />
   ));
 
   const onSubmissionHandler = async () => {
