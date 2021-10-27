@@ -64,7 +64,7 @@ function App(): JSX.Element {
       id={index}
       new_link={element.new_link}
       base_link={element.base_link}
-      setURLs = {(urls:URLrecord[]) => setURLs(urls)}
+      setURLs={(urls: URLrecord[]) => setURLs(urls)}
     />
   ));
 
@@ -166,6 +166,7 @@ function App(): JSX.Element {
                   <Button
                     isDisabled={URLsubmitted}
                     mb={4}
+                    size="lg"
                     colorScheme="teal"
                     type="submit"
                     isLoading={isSubmitting}
@@ -184,11 +185,12 @@ function App(): JSX.Element {
                 />
                 <Box
                   display="flex"
-                  justifyContent="space-between"
+                  justifyContent="flex-start"
                   marginTop="15px"
                 >
                   <Button
                     mb={4}
+                    size="lg"
                     colorScheme="teal"
                     isLoading={isSubmitting}
                     onClick={() => {
@@ -202,6 +204,7 @@ function App(): JSX.Element {
                   </Button>
                   <Button
                     mb={4}
+                    size="lg"
                     colorScheme="teal"
                     isLoading={isSubmitting}
                     onClick={onOpen}

@@ -1,17 +1,17 @@
-import {Box, Heading, Link, Text, Button, HStack } from "@chakra-ui/react";
+import { Box, Heading, Link, Text, Button, HStack } from "@chakra-ui/react";
 import { URLrecord } from "../App";
 
 interface URLPostProps {
   id: number;
   new_link: string;
   base_link: string;
-  setURLs(urls:URLrecord[]): void;
+  setURLs(urls: URLrecord[]): void;
 }
 export function URLPost({
   id,
   new_link,
   base_link,
-  setURLs
+  setURLs,
 }: URLPostProps): JSX.Element {
   const handleDeleteRecord = async () => {
     await fetch(`${process.env.REACT_APP_API}/${new_link}`, {
@@ -39,19 +39,22 @@ export function URLPost({
             {new_link}
           </Link>
         </Heading>
-        <HStack justifyContent="flex-end">
-        <Button
-          mb={4}
-          colorScheme="teal"
-          onClick={() => {
-            window.open(`${process.env.REACT_APP_API}/${new_link}`);
-          }}
-          marginEnd={3}
-        >
-          Visit URL
-        </Button>
-        <Button mb={4} colorScheme="red" onClick={handleDeleteRecord}> Delete</Button>
-
+        <HStack justifyContent="flex-end" alignItems="none" spacing={1}>
+          <Button
+            mb={4}
+            colorScheme="teal"
+            marginInlineEnd={0}
+            onClick={() => {
+              window.open(`${process.env.REACT_APP_API}/${new_link}`);
+            }}
+            marginEnd={3}
+          >
+            Visit URL
+          </Button>
+          <Button mb={4} colorScheme="red" onClick={handleDeleteRecord}>
+            {" "}
+            Delete
+          </Button>
         </HStack>
       </HStack>
       <Text mt={4}>{base_link}</Text>
