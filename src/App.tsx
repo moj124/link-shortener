@@ -63,6 +63,7 @@ function App(): JSX.Element {
     <Box p={5} key={index} shadow="md" borderWidth="1px">
       <Heading fontSize="xl">
         <Link
+          target="_blank"
           color="teal.500"
           href={`${process.env.REACT_APP_API}/${element.new_link}`}
         >
