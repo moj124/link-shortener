@@ -53,7 +53,7 @@ export function ShortLinkView({
           mb={4}
           colorScheme="teal"
           onClick={(event) => {
-            window.location.href = `${process.env.REACT_APP_API}/${url}`;
+            window.open(`${process.env.REACT_APP_API}/${url}`);
           }}
           marginEnd={3}
         >
