@@ -34,6 +34,7 @@ export function ShortLinkView({
         <FormLabel>Shortened Link</FormLabel>
         <InputGroup>
           <Input
+            size="lg"
             value={process.env.REACT_APP_API + "/" + url}
             onChange={(e) => setURLnew(e.target.value)}
             variant="outline"

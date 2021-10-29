@@ -61,7 +61,7 @@ function App(): JSX.Element {
   const container_variant = useBreakpointValue({
     base: "initial",
     sm: "initial",
-    md: "60ch",
+    md: "initial",
     lg: "60ch",
   });
 
@@ -106,9 +106,19 @@ function App(): JSX.Element {
   };
 
   return (
-    <Container marginBottom={10} maxWidth={container_variant}>
+    <Container
+      marginBottom={10}
+      maxWidth={container_variant}
+      paddingInlineEnd="1rem"
+    >
       <form onSubmit={handleSubmit(onSubmissionHandler)}>
-        <VStack height="100vh" alignItems="None" paddingTop={10} spacing={10}>
+        <VStack
+          height="100vh"
+          alignItems="None"
+          paddingTop={10}
+          spacing={10}
+          paddingBottom={10}
+        >
           <Heading size="2xl" color="white">
             LINK SHORTS
           </Heading>
@@ -125,6 +135,7 @@ function App(): JSX.Element {
                 <Input
                   id="url"
                   value={originalURL}
+                  size="lg"
                   aria-invalid={errors.url ? "true" : "false"}
                   {...register("url", {
                     validate: (value) =>
@@ -151,6 +162,7 @@ function App(): JSX.Element {
                     </InputLeftAddon>
                     <Input
                       id="addon"
+                      size="lg"
                       placeholder="alias"
                       value={newURL}
                       aria-invalid={errors.addon ? "true" : "false"}
