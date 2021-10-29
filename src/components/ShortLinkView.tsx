@@ -7,6 +7,8 @@ import {
   Collapse,
   FormLabel,
   useClipboard,
+  Wrap,
+  WrapItem,
 } from "@chakra-ui/react";
 import { ShareButtons } from "./ShareButtons";
 import { useState } from "react";
@@ -53,29 +55,33 @@ export function ShortLinkView({
           </InputRightElement>
         </InputGroup>
       </Box>
-      <Box display="flex" justifyContent="flex-start" alignItems="none">
-        <Button
-          isDisabled={!isURLSubmitted}
-          mb={4}
-          colorScheme="teal"
-          bg="teal.400"
-          onClick={(event) => {
-            window.open(`${process.env.REACT_APP_API}/${url}`);
-          }}
-          marginEnd={3}
-        >
-          Visit URL
-        </Button>
-        <Button
-          isDisabled={!isURLSubmitted}
-          mb={4}
-          colorScheme="teal"
-          bg="teal.400"
-          onClick={() => setShowQRCode(!showQRCode)}
-        >
-          Share
-        </Button>
-      </Box>
+      <Wrap display="flex" justifyContent="flex-start" alignItems="none">
+        <WrapItem>
+          <Button
+            isDisabled={!isURLSubmitted}
+            mb={4}
+            colorScheme="teal"
+            bg="teal.400"
+            onClick={(event) => {
+              window.open(`${process.env.REACT_APP_API}/${url}`);
+            }}
+            marginEnd={3}
+          >
+            Visit URL
+          </Button>
+        </WrapItem>
+        <WrapItem>
+          <Button
+            isDisabled={!isURLSubmitted}
+            mb={4}
+            colorScheme="teal"
+            bg="teal.400"
+            onClick={() => setShowQRCode(!showQRCode)}
+          >
+            Share
+          </Button>
+        </WrapItem>
+      </Wrap>
       <Collapse in={showQRCode} animateOpacity>
         <ShareButtons url={url} />
       </Collapse>

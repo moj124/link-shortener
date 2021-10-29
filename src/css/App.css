@@ -1,5 +1,5 @@
 body {
-  background-color: rgb(141, 44, 211) !important;
+  background-color: hsl(220deg 100% 80%) !important;
 }
 
 .custom-share-button {
@@ -20,4 +20,19 @@ body {
 
 .custom-share-button p:hover {
   text-decoration: underline;
+}
+
+.container {
+  box-shadow: 1px 2px 2px hsl(220deg 60% 50% / 0.2),
+    2px 4px 4px hsl(220deg 60% 50% / 0.2), 4px 8px 8px hsl(220deg 60% 50% / 0.2),
+    8px 16px 16px hsl(220deg 60% 50% / 0.2),
+    16px 32px 32px hsl(220deg 60% 50% / 0.2);
+}
+
+.posts {
+  box-shadow: 1px 2px 2px hsl(var(--shadow-color) / 0.2),
+    2px 4px 4px hsl(var(--shadow-color) / 0.2),
+    4px 8px 8px hsl(var(--shadow-color) / 0.2),
+    8px 16px 16px hsl(var(--shadow-color) / 0.2),
+    16px 32px 32px hsl(var(--shadow-color) / 0.2);
 }

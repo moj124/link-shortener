@@ -9,10 +9,11 @@ import {
   InputGroup,
   VStack,
   Box,
+  Wrap,
+  WrapItem,
   InputLeftAddon,
   Container,
   Collapse,
-  HStack,
   Drawer,
   DrawerOverlay,
   DrawerBody,
@@ -21,6 +22,7 @@ import {
   DrawerFooter,
   DrawerHeader,
   useDisclosure,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 
 import { useForm } from "react-hook-form";
@@ -48,6 +50,13 @@ function App(): JSX.Element {
     reset,
     formState: { errors, isSubmitting },
   } = useForm();
+
+  const drawer_variant = useBreakpointValue({
+    base: "full",
+    sm: "full",
+    md: "full",
+    lg: "md",
+  });
 
   useEffect(() => {
     const loadURLs = async () => {
@@ -90,104 +99,94 @@ function App(): JSX.Element {
   };
 
   return (
-    <Container centerContent>
-      <HStack>
-        <form onSubmit={handleSubmit(onSubmissionHandler)}>
-          <VStack
-            height="100vh"
-            alignItems="center"
-            justifyContent="center"
-            spacing={10}
+    <Container marginBottom={10}>
+      <form onSubmit={handleSubmit(onSubmissionHandler)}>
+        <VStack height="100vh" paddingTop={10}>
+          <Flex
+            width={{ base: "75%", sm: "75%", md: "130%" }}
+            direction="column"
+            background="white"
+            className="container"
+            p={10}
+            rounded={6}
           >
-            <Flex
-              width={{ base: "75%", sm: "75%", md: "130%" }}
-              direction="column"
-              background="white"
-              p={12}
-              rounded={6}
-            >
-              <Heading mb={6}>Link Shortener</Heading>
-              <FormControl isInvalid={errors.url} isRequired>
-                <FormLabel htmlFor="url">URL</FormLabel>
-                <Box>
-                  <Input
-                    id="url"
-                    value={originalURL}
-                    aria-invalid={errors.url ? "true" : "false"}
-                    {...register("url", {
-                      validate: (value) =>
-                        validateURL(value) || "please enter a valid URL",
-                    })}
-                    onChange={(e) => {
-                      setURLoriginal(e.target.value);
-                      setURLsubmitted(false);
-                    }}
-                    autoFocus
-                  />
-                  <FormErrorMessage>
-                    {errors.url && errors.url.message}
-                  </FormErrorMessage>
-                </Box>
-              </FormControl>
-              <Collapse in={!URLsubmitted}>
-                <FormControl isInvalid={errors.addon}>
-                  <VStack marginTop="15px" display="flex-start">
-                    <FormLabel htmlFor="addon">Customise Link</FormLabel>
-                    <InputGroup>
-                      <InputLeftAddon>
-                        {process.env.REACT_APP_API}/
-                      </InputLeftAddon>
-                      <Input
-                        id="addon"
-                        placeholder="alias"
-                        value={newURL}
-                        aria-invalid={errors.addon ? "true" : "false"}
-                        {...register("addon", {
-                          validate: (value) =>
-                            validateAddon(value) ||
-                            "please enter a valid alias",
-                        })}
-                        onChange={(e) => {
-                          setURLnew(e.target.value);
-                          setURLsubmitted(false);
-                        }}
-                      />
-                    </InputGroup>
-                    <FormErrorMessage paddingLeft={180}>
-                      {errors.addon && errors.addon.message}
-                    </FormErrorMessage>
-                  </VStack>
-                </FormControl>
-                <Box
-                  display="flex"
-                  justifyContent="space-between"
-                  marginTop="15px"
-                >
-                  <Button
-                    isDisabled={URLsubmitted}
-                    mb={4}
-                    size="lg"
-                    colorScheme="teal"
-                    type="submit"
-                    isLoading={isSubmitting}
-                  >
-                    Shorten
-                  </Button>
-                </Box>
-              </Collapse>
-              <Collapse in={URLsubmitted} animateOpacity>
-                <ShortLinkView
-                  url={newURL}
-                  isURLSubmitted={URLsubmitted}
-                  setURLnew={(url: string) => {
-                    setURLnew(url);
+            <Heading mb={6}>Link Shortener</Heading>
+            <FormControl isInvalid={errors.url} isRequired>
+              <FormLabel htmlFor="url">URL</FormLabel>
+              <Box>
+                <Input
+                  id="url"
+                  value={originalURL}
+                  aria-invalid={errors.url ? "true" : "false"}
+                  {...register("url", {
+                    validate: (value) =>
+                      validateURL(value) || "please enter a valid URL",
+                  })}
+                  onChange={(e) => {
+                    setURLoriginal(e.target.value);
+                    setURLsubmitted(false);
                   }}
+                  autoFocus
                 />
-                <Box
-                  display="flex"
-                  justifyContent="flex-start"
-                  marginTop="15px"
+                <FormErrorMessage>
+                  {errors.url && errors.url.message}
+                </FormErrorMessage>
+              </Box>
+            </FormControl>
+            <Collapse in={!URLsubmitted}>
+              <FormControl isInvalid={errors.addon}>
+                <VStack marginTop="15px" display="flex-start">
+                  <FormLabel htmlFor="addon">Customise Link</FormLabel>
+                  <InputGroup>
+                    <InputLeftAddon>
+                      {process.env.REACT_APP_API}/
+                    </InputLeftAddon>
+                    <Input
+                      id="addon"
+                      placeholder="alias"
+                      value={newURL}
+                      aria-invalid={errors.addon ? "true" : "false"}
+                      {...register("addon", {
+                        validate: (value) =>
+                          validateAddon(value) || "please enter a valid alias",
+                      })}
+                      onChange={(e) => {
+                        setURLnew(e.target.value);
+                        setURLsubmitted(false);
+                      }}
+                    />
+                  </InputGroup>
+                  <FormErrorMessage paddingLeft={180}>
+                    {errors.addon && errors.addon.message}
+                  </FormErrorMessage>
+                </VStack>
+              </FormControl>
+              <Box
+                display="flex"
+                justifyContent="space-between"
+                marginTop="15px"
+              >
+                <Button
+                  mb={4}
+                  size="lg"
+                  colorScheme="teal"
+                  type="submit"
+                  isLoading={isSubmitting}
                 >
+                  Shorten
+                </Button>
+              </Box>
+            </Collapse>
+            <Collapse in={URLsubmitted} animateOpacity>
+              <ShortLinkView
+                url={newURL}
+                isURLSubmitted={URLsubmitted}
+                setURLnew={(url: string) => {
+                  setURLnew(url);
+                }}
+              />
+              <Wrap display="flex" justifyContent="flex-start" marginTop="15px">
+                <WrapItem>
                   <Button
                     mb={4}
                     size="lg"
@@ -202,6 +201,8 @@ function App(): JSX.Element {
                   >
                     Shorten another
                   </Button>
+                </WrapItem>
+                <WrapItem>
                   <Button
                     mb={4}
                     size="lg"
@@ -211,29 +212,34 @@ function App(): JSX.Element {
                   >
                     My URLs
                   </Button>
-                </Box>
-              </Collapse>
-            </Flex>
-          </VStack>
-        </form>
-        <Drawer isOpen={isOpen} placement="right" onClose={onClose} size="md">
-          <DrawerOverlay />
-          <DrawerContent>
-            <DrawerCloseButton />
-            <DrawerHeader>List Of URLs</DrawerHeader>
+                </WrapItem>
+              </Wrap>
+            </Collapse>
+          </Flex>
+        </VStack>
+      </form>
+      <Drawer
+        isOpen={isOpen}
+        placement="right"
+        onClose={onClose}
+        size={drawer_variant}
+      >
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader>List Of URLs</DrawerHeader>
 
-            <DrawerBody>
-              <VStack align="none">{url_posts}</VStack>
-            </DrawerBody>
+          <DrawerBody>
+            <VStack align="none">{url_posts}</VStack>
+          </DrawerBody>
 
-            <DrawerFooter>
-              <Button variant="outline" mr={3} size="lg" onClick={onClose}>
-                Exit
-              </Button>
-            </DrawerFooter>
-          </DrawerContent>
-        </Drawer>
-      </HStack>
+          <DrawerFooter>
+            <Button variant="outline" mr={3} size="lg" onClick={onClose}>
+              Exit
+            </Button>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
     </Container>
   );
 }

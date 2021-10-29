@@ -28,7 +28,7 @@ export function URLPost({
   };
 
   return (
-    <Box p={5} key={id} shadow="md" borderWidth="1px">
+    <Box p={5} key={id} shadow="md" borderWidth="1px" className="posts">
       <HStack justifyContent="space-between">
         <Heading fontSize="xl">
           <Link
