@@ -33,7 +33,7 @@ export function URLPost({
         <Heading fontSize="xl">
           <Link
             target="_blank"
-            color="teal.500"
+            color="blue.500"
             href={`${process.env.REACT_APP_API}/${new_link}`}
           >
             {new_link}
@@ -42,7 +42,7 @@ export function URLPost({
         <HStack justifyContent="flex-end" alignItems="none" spacing={1}>
           <Button
             mb={4}
-            colorScheme="teal"
+            colorScheme="blue"
             marginInlineEnd={0}
             onClick={() => {
               window.open(`${process.env.REACT_APP_API}/${new_link}`);

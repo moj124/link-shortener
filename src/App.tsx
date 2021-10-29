@@ -47,7 +47,6 @@ function App(): JSX.Element {
   const {
     handleSubmit,
     register,
-    reset,
     formState: { errors, isSubmitting },
   } = useForm();
 
@@ -129,8 +128,10 @@ function App(): JSX.Element {
             p={10}
             rounded={6}
           >
-            <FormControl isInvalid={errors.url} isRequired>
-              <FormLabel htmlFor="url" fontSize="2vw">URL</FormLabel>
+            <FormControl isInvalid={errors.url}>
+              <FormLabel htmlFor="url" fontSize="2vw">
+                URL
+              </FormLabel>
               <Box>
                 <Input
                   id="url"
@@ -155,7 +156,9 @@ function App(): JSX.Element {
             <Collapse in={!URLsubmitted}>
               <FormControl isInvalid={errors.addon}>
                 <VStack marginTop="15px" display="flex-start">
-                  <FormLabel htmlFor="addon" fontSize="2vw">Customise Link</FormLabel>
+                  <FormLabel htmlFor="addon" fontSize="2vw">
+                    Customise Link
+                  </FormLabel>
                   <InputGroup size="lg">
                     <InputLeftAddon>
                       {process.env.REACT_APP_API}/
@@ -212,8 +215,8 @@ function App(): JSX.Element {
                     colorScheme="blue"
                     isLoading={isSubmitting}
                     onClick={() => {
-                      reset({ url: "" });
-                      reset({ addon: "" });
+                      setURLoriginal("");
+                      setURLnew("");
                       setURLsubmitted(false);
                     }}
                     marginEnd={3}
@@ -245,8 +248,10 @@ function App(): JSX.Element {
       >
         <DrawerOverlay />
         <DrawerContent>
-          <DrawerCloseButton size="lg" id="drawer"/>
-          <DrawerHeader fontSize="4vw">MY URLS</DrawerHeader>
+          <DrawerCloseButton size="lg" id="drawer" />
+          <DrawerHeader fontSize="4vw" color="#3182ce">
+            MY URLS
+          </DrawerHeader>
 
           <DrawerBody>
             <VStack align="none">{url_posts}</VStack>
