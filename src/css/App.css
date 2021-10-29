@@ -1,5 +1,11 @@
 body {
-  background-color: hsl(220deg 100% 80%) !important;
+  background: rgb(12, 9, 121) !important;
+  background: linear-gradient(
+    180deg,
+    rgba(12, 9, 121, 1) 4%,
+    rgba(35, 83, 180, 1) 30%,
+    rgba(153, 187, 255, 1) 100%
+  ) !important;
 }
 
 .custom-share-button {
@@ -15,7 +21,7 @@ body {
 }
 
 .custom-share-icon rect {
-  fill: #319795;
+  fill: #4299e1;
 }
 
 .custom-share-button p:hover {

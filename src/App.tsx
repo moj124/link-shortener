@@ -58,6 +58,13 @@ function App(): JSX.Element {
     lg: "md",
   });
 
+  const container_variant = useBreakpointValue({
+    base: "initial",
+    sm: "initial",
+    md: "60ch",
+    lg: "60ch",
+  });
+
   useEffect(() => {
     const loadURLs = async () => {
       const res = await fetch(`${process.env.REACT_APP_API}/urls`);
@@ -99,18 +106,19 @@ function App(): JSX.Element {
   };
 
   return (
-    <Container marginBottom={10}>
+    <Container marginBottom={10} maxWidth={container_variant}>
       <form onSubmit={handleSubmit(onSubmissionHandler)}>
-        <VStack height="100vh" paddingTop={10}>
+        <VStack height="100vh" alignItems="None" paddingTop={10} spacing={10}>
+          <Heading size="2xl" color="white">
+            LINK SHORTS
+          </Heading>
           <Flex
-            width={{ base: "75%", sm: "75%", md: "130%" }}
             direction="column"
             background="white"
             className="container"
             p={10}
             rounded={6}
           >
-            <Heading mb={6}>Link Shortener</Heading>
             <FormControl isInvalid={errors.url} isRequired>
               <FormLabel htmlFor="url">URL</FormLabel>
               <Box>
@@ -120,7 +128,7 @@ function App(): JSX.Element {
                   aria-invalid={errors.url ? "true" : "false"}
                   {...register("url", {
                     validate: (value) =>
-                      validateURL(value) || "please enter a valid URL",
+                      validateURL(value) || "Please enter a valid URL",
                   })}
                   onChange={(e) => {
                     setURLoriginal(e.target.value);
@@ -148,7 +156,7 @@ function App(): JSX.Element {
                       aria-invalid={errors.addon ? "true" : "false"}
                       {...register("addon", {
                         validate: (value) =>
-                          validateAddon(value) || "please enter a valid alias",
+                          validateAddon(value) || "Please enter a valid alias",
                       })}
                       onChange={(e) => {
                         setURLnew(e.target.value);
@@ -169,7 +177,7 @@ function App(): JSX.Element {
                 <Button
                   mb={4}
                   size="lg"
-                  colorScheme="teal"
+                  colorScheme="blue"
                   type="submit"
                   isLoading={isSubmitting}
                 >
@@ -190,7 +198,7 @@ function App(): JSX.Element {
                   <Button
                     mb={4}
                     size="lg"
-                    colorScheme="teal"
+                    colorScheme="blue"
                     isLoading={isSubmitting}
                     onClick={() => {
                       reset({ url: "" });
@@ -206,7 +214,7 @@ function App(): JSX.Element {
                   <Button
                     mb={4}
                     size="lg"
-                    colorScheme="teal"
+                    colorScheme="blue"
                     isLoading={isSubmitting}
                     onClick={onOpen}
                   >

@@ -47,8 +47,8 @@ export function ShortLinkView({
               h="1.75rem"
               size="sm"
               onClick={onCopy}
-              colorScheme="teal"
-              bg="teal.400"
+              colorScheme="blue"
+              bg="blue.400"
             >
               {hasCopied ? "Copied" : "Copy"}
             </Button>
@@ -60,8 +60,8 @@ export function ShortLinkView({
           <Button
             isDisabled={!isURLSubmitted}
             mb={4}
-            colorScheme="teal"
-            bg="teal.400"
+            colorScheme="blue"
+            bg="blue.400"
             onClick={(event) => {
               window.open(`${process.env.REACT_APP_API}/${url}`);
             }}
@@ -74,8 +74,8 @@ export function ShortLinkView({
           <Button
             isDisabled={!isURLSubmitted}
             mb={4}
-            colorScheme="teal"
-            bg="teal.400"
+            colorScheme="blue"
+            bg="blue.400"
             onClick={() => setShowQRCode(!showQRCode)}
           >
             Share
