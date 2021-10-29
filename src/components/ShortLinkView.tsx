@@ -51,10 +51,10 @@ export function ShortLinkView({
           <InputRightElement width="4.5rem">
             <Button
               h="1.75rem"
+              overflow="hidden"
               size="sm"
+              variant="outline"
               onClick={onCopy}
-              colorScheme="blue"
-              bg="blue.400"
             >
               {hasCopied ? "Copied" : "Copy"}
             </Button>
@@ -64,6 +64,7 @@ export function ShortLinkView({
       <Wrap display="flex" justifyContent="flex-start" alignItems="none">
         <WrapItem>
           <Button
+            overflow="hidden"
             isDisabled={!isURLSubmitted}
             mb={4}
             colorScheme="blue"
@@ -78,6 +79,7 @@ export function ShortLinkView({
         </WrapItem>
         <WrapItem>
           <Button
+            overflow="hidden"
             isDisabled={!isURLSubmitted}
             mb={4}
             colorScheme="blue"

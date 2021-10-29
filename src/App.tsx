@@ -62,7 +62,7 @@ function App(): JSX.Element {
     base: "initial",
     sm: "initial",
     md: "initial",
-    lg: "60ch",
+    lg: "70ch",
   });
 
   useEffect(() => {
@@ -163,7 +163,11 @@ function App(): JSX.Element {
                     <span className="icon-text">Customise Link</span>
                   </FormLabel>
                   <InputGroup size="lg">
-                    <InputLeftAddon>
+                    <InputLeftAddon
+                      textOverflow="ellipsis"
+                      overflow="hidden"
+                      maxWidth="50%"
+                    >
                       {process.env.REACT_APP_API}/
                     </InputLeftAddon>
                     <Input
@@ -198,6 +202,7 @@ function App(): JSX.Element {
                   colorScheme="blue"
                   type="submit"
                   isLoading={isSubmitting}
+                  overflow="hidden"
                 >
                   Shorten
                 </Button>
@@ -217,6 +222,7 @@ function App(): JSX.Element {
                 <WrapItem>
                   <Button
                     mb={4}
+                    overflow="hidden"
                     size="lg"
                     colorScheme="blue"
                     isLoading={isSubmitting}
@@ -232,6 +238,7 @@ function App(): JSX.Element {
                 </WrapItem>
                 <WrapItem>
                   <Button
+                    overflow="hidden"
                     mb={4}
                     size="lg"
                     colorScheme="blue"
@@ -264,7 +271,13 @@ function App(): JSX.Element {
           </DrawerBody>
 
           <DrawerFooter>
-            <Button variant="outline" mr={3} size="lg" onClick={onClose}>
+            <Button
+              variant="outline"
+              mr={3}
+              size="lg"
+              onClick={onClose}
+              overflow="hidden"
+            >
               Exit
             </Button>
           </DrawerFooter>
