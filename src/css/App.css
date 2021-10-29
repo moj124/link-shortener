@@ -1,3 +1,7 @@
+* {
+  font-family: 'Roboto Mono', monospace;
+}
+
 body {
   background: rgb(12, 9, 121) !important;
   background: linear-gradient(
@@ -44,10 +48,18 @@ body {
 }
 
 p {
-  font-size: 2vw;
+  font-size: 1.5vw;
 }
 
 #drawer svg {
   width: 3vw;
   height: 3vw;
+}
+
+.hover_view:hover {
+  background-color:red;
+}
+
+.icon-text{
+  margin-left: 10px;
 }

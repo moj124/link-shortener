@@ -19,7 +19,7 @@ interface ShareProps {
 
 export function ShareButtons({ url }: ShareProps): JSX.Element {
   return (
-    <Wrap flex-direction="row" display="flex">
+    <Wrap flex-direction="row" display="flex" className="hover-view">
       <WrapItem>
         <QRCode value={`${process.env.REACT_APP_API}/${url}`} size={200} />
       </WrapItem>

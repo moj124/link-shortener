@@ -16,22 +16,25 @@ import { useState } from "react";
 interface ShortLinkViewProps {
   url: string;
   isURLSubmitted: boolean;
+  showQRCode: boolean
+  setShowQRCode(bool:boolean): void;
   setURLnew(url: string): void;
 }
 
 export function ShortLinkView({
   url,
   isURLSubmitted,
+  showQRCode,
+  setShowQRCode,
   setURLnew,
 }: ShortLinkViewProps): JSX.Element {
-  const [showQRCode, setShowQRCode] = useState(false);
   const { hasCopied, onCopy } = useClipboard(
     process.env.REACT_APP_API + "/" + url
   );
   return (
     <>
       <Box marginTop="15px">
-        <FormLabel fontSize="2vw">Shortened Link</FormLabel>
+        <FormLabel fontSize="1.5vw"><i className="fas fa-magic"></i><span className="icon-text">Short Link</span></FormLabel>
         <InputGroup>
           <Input
             size="lg"

@@ -40,6 +40,7 @@ export interface URLrecord {
 
 function App(): JSX.Element {
   const [URLsubmitted, setURLsubmitted] = useState(false);
+  const [showQRCode, setShowQRCode] = useState(false);
   const [originalURL, setURLoriginal] = useState("");
   const [newURL, setURLnew] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -115,7 +116,7 @@ function App(): JSX.Element {
           height="100vh"
           alignItems="None"
           paddingTop={10}
-          spacing={10}
+          spacing={8}
           paddingBottom={10}
         >
           <Heading fontSize="4vw" color="white">
@@ -128,11 +129,11 @@ function App(): JSX.Element {
             p={10}
             rounded={6}
           >
+          <Collapse in={!(URLsubmitted && showQRCode)} animateOpacity>
             <FormControl isInvalid={errors.url}>
-              <FormLabel htmlFor="url" fontSize="2vw">
-                URL
+              <FormLabel htmlFor="url" fontSize="1.5vw">
+              <i className="fas fa-link"></i><span className="icon-text">URL</span>
               </FormLabel>
-              <Box>
                 <Input
                   id="url"
                   value={originalURL}
@@ -151,13 +152,13 @@ function App(): JSX.Element {
                 <FormErrorMessage>
                   {errors.url && errors.url.message}
                 </FormErrorMessage>
-              </Box>
             </FormControl>
+              </Collapse>
             <Collapse in={!URLsubmitted}>
               <FormControl isInvalid={errors.addon}>
                 <VStack marginTop="15px" display="flex-start">
-                  <FormLabel htmlFor="addon" fontSize="2vw">
-                    Customise Link
+                  <FormLabel htmlFor="addon" fontSize="1.5vw">
+                  <i className="fas fa-pencil-ruler"></i><span className="icon-text">Customise Link</span>
                   </FormLabel>
                   <InputGroup size="lg">
                     <InputLeftAddon>
@@ -170,7 +171,7 @@ function App(): JSX.Element {
                       aria-invalid={errors.addon ? "true" : "false"}
                       {...register("addon", {
                         validate: (value) =>
-                          validateAddon(value) || "Please enter a valid alias",
+                          validateAddon(value) || "Please enter a alphanumeric sequence",
                       })}
                       onChange={(e) => {
                         setURLnew(e.target.value);
@@ -203,6 +204,8 @@ function App(): JSX.Element {
               <ShortLinkView
                 url={newURL}
                 isURLSubmitted={URLsubmitted}
+                showQRCode = {showQRCode}
+                setShowQRCode={(bool:boolean) => setShowQRCode(bool)}
                 setURLnew={(url: string) => {
                   setURLnew(url);
                 }}
