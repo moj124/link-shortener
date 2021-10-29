@@ -1,5 +1,5 @@
 * {
-  font-family: 'Roboto Mono', monospace;
+  font-family: "Roboto Mono", monospace;
 }
 
 body {
@@ -57,9 +57,9 @@ p {
 }
 
 .hover_view:hover {
-  background-color:red;
+  background-color: red;
 }
 
-.icon-text{
+.icon-text {
   margin-left: 10px;
 }

@@ -11,13 +11,12 @@ import {
   WrapItem,
 } from "@chakra-ui/react";
 import { ShareButtons } from "./ShareButtons";
-import { useState } from "react";
 
 interface ShortLinkViewProps {
   url: string;
   isURLSubmitted: boolean;
-  showQRCode: boolean
-  setShowQRCode(bool:boolean): void;
+  showQRCode: boolean;
+  setShowQRCode(bool: boolean): void;
   setURLnew(url: string): void;
 }
 
@@ -34,7 +33,10 @@ export function ShortLinkView({
   return (
     <>
       <Box marginTop="15px">
-        <FormLabel fontSize="1.5vw"><i className="fas fa-magic"></i><span className="icon-text">Short Link</span></FormLabel>
+        <FormLabel fontSize="1.5vw">
+          <i className="fas fa-magic"></i>
+          <span className="icon-text">Short Link</span>
+        </FormLabel>
         <InputGroup>
           <Input
             size="lg"
