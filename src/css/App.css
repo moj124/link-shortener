@@ -42,3 +42,12 @@ body {
     8px 16px 16px hsl(var(--shadow-color) / 0.2),
     16px 32px 32px hsl(var(--shadow-color) / 0.2);
 }
+
+p {
+  font-size: 2vw;
+}
+
+#drawer svg {
+  width: 4vw;
+  height: 4vw;
+}

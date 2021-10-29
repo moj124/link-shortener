@@ -31,7 +31,7 @@ export function ShortLinkView({
   return (
     <>
       <Box marginTop="15px">
-        <FormLabel>Shortened Link</FormLabel>
+        <FormLabel fontSize="2vw">Shortened Link</FormLabel>
         <InputGroup>
           <Input
             size="lg"

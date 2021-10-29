@@ -119,7 +119,7 @@ function App(): JSX.Element {
           spacing={10}
           paddingBottom={10}
         >
-          <Heading size="2xl" color="white">
+          <Heading fontSize="4vw" color="white">
             LINK SHORTS
           </Heading>
           <Flex
@@ -130,7 +130,7 @@ function App(): JSX.Element {
             rounded={6}
           >
             <FormControl isInvalid={errors.url} isRequired>
-              <FormLabel htmlFor="url">URL</FormLabel>
+              <FormLabel htmlFor="url" fontSize="2vw">URL</FormLabel>
               <Box>
                 <Input
                   id="url"
@@ -155,14 +155,13 @@ function App(): JSX.Element {
             <Collapse in={!URLsubmitted}>
               <FormControl isInvalid={errors.addon}>
                 <VStack marginTop="15px" display="flex-start">
-                  <FormLabel htmlFor="addon">Customise Link</FormLabel>
-                  <InputGroup>
+                  <FormLabel htmlFor="addon" fontSize="2vw">Customise Link</FormLabel>
+                  <InputGroup size="lg">
                     <InputLeftAddon>
                       {process.env.REACT_APP_API}/
                     </InputLeftAddon>
                     <Input
                       id="addon"
-                      size="lg"
                       placeholder="alias"
                       value={newURL}
                       aria-invalid={errors.addon ? "true" : "false"}
@@ -246,8 +245,8 @@ function App(): JSX.Element {
       >
         <DrawerOverlay />
         <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader>List Of URLs</DrawerHeader>
+          <DrawerCloseButton size="lg" id="drawer"/>
+          <DrawerHeader fontSize="4vw">MY URLS</DrawerHeader>
 
           <DrawerBody>
             <VStack align="none">{url_posts}</VStack>
