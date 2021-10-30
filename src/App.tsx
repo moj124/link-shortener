@@ -231,6 +231,7 @@ function App(): JSX.Element {
                       setURLnew("");
                       setURLsubmitted(false);
                     }}
+                    onMouseEnter={() => setShowQRCode(false)}
                     marginEnd={3}
                   >
                     Shorten another
@@ -244,6 +245,7 @@ function App(): JSX.Element {
                     colorScheme="blue"
                     isLoading={isSubmitting}
                     onClick={onOpen}
+                    onMouseEnter={() => setShowQRCode(false)}
                   >
                     My URLs
                   </Button>

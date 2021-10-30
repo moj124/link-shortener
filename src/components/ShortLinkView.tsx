@@ -73,6 +73,7 @@ export function ShortLinkView({
               window.open(`${process.env.REACT_APP_API}/${url}`);
             }}
             marginEnd={3}
+            onMouseEnter={() => setShowQRCode(false)}
           >
             Visit URL
           </Button>
@@ -85,6 +86,7 @@ export function ShortLinkView({
             colorScheme="blue"
             bg="blue.400"
             onClick={() => setShowQRCode(!showQRCode)}
+            onMouseEnter={() => setShowQRCode(true)}
           >
             Share
           </Button>
