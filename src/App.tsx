@@ -23,7 +23,6 @@ import {
   DrawerHeader,
   useDisclosure,
   useBreakpointValue,
-  HStack,
 } from "@chakra-ui/react";
 
 import { useForm } from "react-hook-form";
