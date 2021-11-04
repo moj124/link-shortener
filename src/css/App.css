@@ -3,7 +3,7 @@
 }
 
 body {
-  background: rgb(12, 9, 121) !important;
+  background: hsl(242, 86%, 25%) !important;
   background: linear-gradient(
     180deg,
     rgba(12, 9, 121, 1) 4%,
@@ -25,7 +25,7 @@ body {
 }
 
 .custom-share-icon rect {
-  fill: #4299e1;
+  fill: hsl(207, 73%, 57%);
 }
 
 .custom-share-button p:hover {
@@ -48,12 +48,12 @@ body {
 }
 
 p {
-  font-size: 1.5vw;
+  font-size: 1.2rem;
 }
 
 #drawer svg {
-  width: 3vw;
-  height: 3vw;
+  width: 3rem;
+  height: 3rem;
 }
 
 .hover_view:hover {
@@ -62,4 +62,10 @@ p {
 
 .icon-text {
   margin-left: 10px;
+}
+
+@media screen and (max-width: 375px) {
+  .custom-info-input {
+    display: none !important;
+  }
 }

@@ -33,7 +33,7 @@ export function ShortLinkView({
   return (
     <>
       <Box marginTop="15px">
-        <FormLabel fontSize="1.5vw">
+        <FormLabel fontSize="1rem">
           <i className="fas fa-magic"></i>
           <span className="icon-text">Short Link</span>
         </FormLabel>

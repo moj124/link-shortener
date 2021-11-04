@@ -23,6 +23,7 @@ import {
   DrawerHeader,
   useDisclosure,
   useBreakpointValue,
+  HStack,
 } from "@chakra-ui/react";
 
 import { useForm } from "react-hook-form";
@@ -62,7 +63,7 @@ function App(): JSX.Element {
     base: "initial",
     sm: "initial",
     md: "initial",
-    lg: "70ch",
+    lg: "60ch",
   });
 
   useEffect(() => {
@@ -113,13 +114,14 @@ function App(): JSX.Element {
     >
       <form onSubmit={handleSubmit(onSubmissionHandler)}>
         <VStack
+          minWidth="30ch"
           height="100vh"
           alignItems="None"
           paddingTop={10}
           spacing={8}
           paddingBottom={10}
         >
-          <Heading fontSize="4vw" color="white">
+          <Heading fontSize="2rem" color="white">
             LINK SHORTS
           </Heading>
           <Flex
@@ -131,7 +133,7 @@ function App(): JSX.Element {
           >
             <Collapse in={!(URLsubmitted && showQRCode)} animateOpacity>
               <FormControl isInvalid={errors.url}>
-                <FormLabel htmlFor="url" fontSize="1.5vw">
+                <FormLabel htmlFor="url" fontSize="1rem">
                   <i className="fas fa-link"></i>
                   <span className="icon-text">URL</span>
                 </FormLabel>
@@ -158,7 +160,7 @@ function App(): JSX.Element {
             <Collapse in={!URLsubmitted}>
               <FormControl isInvalid={errors.addon}>
                 <VStack marginTop="15px" display="flex-start">
-                  <FormLabel htmlFor="addon" fontSize="1.5vw">
+                  <FormLabel htmlFor="addon" fontSize="1rem">
                     <i className="fas fa-pencil-ruler"></i>
                     <span className="icon-text">Customise Link</span>
                   </FormLabel>
@@ -167,6 +169,7 @@ function App(): JSX.Element {
                       textOverflow="ellipsis"
                       overflow="hidden"
                       maxWidth="50%"
+                      className="custom-info-input"
                     >
                       {process.env.REACT_APP_API}/
                     </InputLeftAddon>
@@ -264,7 +267,7 @@ function App(): JSX.Element {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton size="lg" id="drawer" />
-          <DrawerHeader fontSize="4vw" color="#3182ce">
+          <DrawerHeader fontSize="4rem" color="#3182ce">
             MY URLS
           </DrawerHeader>
 
