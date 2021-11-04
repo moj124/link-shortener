@@ -40,7 +40,11 @@ export function ShortLinkView({
         <InputGroup>
           <Input
             size="lg"
-            value={process.env.REACT_APP_API + "/" + url}
+            value={
+              process.env.REACT_APP_API?.replace(/(^\w+:|^)\/\//, "") +
+              "/" +
+              url
+            }
             onChange={(e) => setURLnew(e.target.value)}
             variant="outline"
             mb={3}
@@ -53,8 +57,9 @@ export function ShortLinkView({
               h="1.75rem"
               overflow="hidden"
               size="sm"
-              variant="outline"
               onClick={onCopy}
+              colorScheme="blue"
+              className="copy-button"
             >
               {hasCopied ? "Copied" : "Copy"}
             </Button>

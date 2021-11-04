@@ -170,7 +170,7 @@ function App(): JSX.Element {
                       maxWidth="50%"
                       className="custom-info-input"
                     >
-                      {process.env.REACT_APP_API}/
+                      {process.env.REACT_APP_API?.replace(/(^\w+:|^)\/\//, "")}/
                     </InputLeftAddon>
                     <Input
                       id="addon"
