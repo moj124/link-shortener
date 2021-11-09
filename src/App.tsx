@@ -46,10 +46,11 @@ function App(): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [myURLs, setURLs] = useState<URLrecord[]>([]);
   const {
+    reset,
     handleSubmit,
     register,
     formState: { errors, isSubmitting },
-  } = useForm();
+  } = useForm({ reValidateMode: "onChange" });
 
   const drawer_variant = useBreakpointValue({
     base: "full",
@@ -138,18 +139,22 @@ function App(): JSX.Element {
                 </FormLabel>
                 <Input
                   id="url"
-                  value={originalURL}
                   size="lg"
                   aria-invalid={errors.url ? "true" : "false"}
                   {...register("url", {
-                    validate: (value) =>
-                      validateURL(value) || "Please enter a valid URL",
+                    validate: {
+                      valid: (value) =>
+                        validateURL(value) || "Please enter a valid URL",
+                      notEmpty: (value) =>
+                        value.length > 0 || "Please enter a URL",
+                    },
                   })}
                   onChange={(e) => {
                     setURLoriginal(e.target.value);
                     setURLsubmitted(false);
                   }}
                   autoFocus
+                  required
                 />
                 <FormErrorMessage>
                   {errors.url && errors.url.message}
@@ -175,7 +180,6 @@ function App(): JSX.Element {
                     <Input
                       id="addon"
                       placeholder="alias"
-                      value={newURL}
                       aria-invalid={errors.addon ? "true" : "false"}
                       {...register("addon", {
                         validate: (value) =>
@@ -229,6 +233,7 @@ function App(): JSX.Element {
                     colorScheme="blue"
                     isLoading={isSubmitting}
                     onClick={() => {
+                      reset({ url: "", addon: "" });
                       setURLoriginal("");
                       setURLnew("");
                       setURLsubmitted(false);

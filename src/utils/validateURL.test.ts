@@ -1,6 +1,7 @@
 import { validateURL } from "./validateURL";
 
 test("validateURL returns a boolean, whether the url is valid", () => {
+  expect(validateURL("")).toBe(false);
   expect(validateURL("World")).toBe(false);
   expect(validateURL("Richard")).toBe(false);
   expect(validateURL("Academy Scholars")).toBe(false);

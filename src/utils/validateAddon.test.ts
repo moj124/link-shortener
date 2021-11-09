@@ -1,6 +1,7 @@
 import { validateAddon } from "./validateAddon";
 
 test("validateAddon returns a boolean, whether the alias is valid", () => {
+  expect(validateAddon("")).toBe(true);
   expect(validateAddon("World")).toBe(true);
   expect(validateAddon("Richard")).toBe(true);
   expect(validateAddon("Academy Scholars")).toBe(false);
