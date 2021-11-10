@@ -140,6 +140,7 @@ function App(): JSX.Element {
                 <Input
                   id="url"
                   size="lg"
+                  placeholder="link"
                   aria-invalid={errors.url ? "true" : "false"}
                   {...register("url", {
                     validate: {
@@ -172,7 +173,7 @@ function App(): JSX.Element {
                     <InputLeftAddon
                       textOverflow="ellipsis"
                       overflow="hidden"
-                      maxWidth="50%"
+                      maxWidth="fit-content"
                       className="custom-info-input"
                     >
                       {process.env.REACT_APP_API?.replace(/(^\w+:|^)\/\//, "")}/
